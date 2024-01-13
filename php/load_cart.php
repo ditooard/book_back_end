@@ -14,7 +14,6 @@ if ($result) {
             $cart['cart_qty'] = $row['cart_qty'];
             $cart['book_title'] = $row['book_title'];
             $cart['book_price'] = $row['book_price'];
-            $cart['cart_qty'] = $row['cart_qty'];
             array_push($cartlist["carts"], $cart);
         }
         $response = array('status' => 'success', 'data' => $cartlist);
