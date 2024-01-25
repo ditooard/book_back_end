@@ -10,16 +10,17 @@ include_once("dbconnect.php");
 
 $name = $_POST['name'];
 $email = $_POST['email'];
+$phone = $_POST['phone'];
 $password = sha1($_POST['password']);
 
-$sqlinsert = "INSERT INTO `tbl_users`(`user_email`, `user_name`, `user_password`) VALUES ('$email','$name','$password')";
+$sqlinsert = "INSERT INTO `tbl_users`(`user_email`, `user_name`, `phone`,`user_password`) VALUES ('$email','$name','$phone','$password')";
 
 if ($conn->query($sqlinsert) === TRUE) {
-	$response = array('status' => 'success', 'data' => null);
+    $response = array('status' => 'success', 'data' => $sqlinsert);
     sendJsonResponse($response);
-}else{
-	$response = array('status' => 'failed', 'data' => null);
-	sendJsonResponse($response);
+} else {
+    $response = array('status' => 'failed', 'data' => null);
+    sendJsonResponse($response);
 }
 
 
@@ -28,5 +29,3 @@ function sendJsonResponse($sentArray)
     header('Content-Type: application/json');
     echo json_encode($sentArray);
 }
-
-?>
