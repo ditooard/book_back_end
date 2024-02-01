@@ -27,11 +27,11 @@ if ($conn->query($sqlinsert) === TRUE) {
     $filename = mysqli_insert_id($conn);
     $path = '../assets/books/' . $filename . '.png';
     file_put_contents($path, $decoded_string);
-	$response = array('status' => 'success', 'data' => $sqlinsert);
+    $response = array('status' => 'success', 'message' => 'Book has been added successfully', 'data' => $sqlinsert);
     sendJsonResponse($response);
-}else{
-	$response = array('status' => 'Failed to input new book', );
-	sendJsonResponse($response);
+} else {
+    $response = array('status' => 'error', 'message' => 'Book has been failed added');
+    sendJsonResponse($response);
 }
 
 
@@ -40,5 +40,3 @@ function sendJsonResponse($sentArray)
     header('Content-Type: application/json');
     echo json_encode($sentArray);
 }
-
-?>

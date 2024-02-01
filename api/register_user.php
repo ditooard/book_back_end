@@ -16,10 +16,10 @@ $password = sha1($_POST['password']);
 $sqlinsert = "INSERT INTO `tbl_users`(`user_email`, `user_name`, `phone`,`user_password`) VALUES ('$email','$name','$phone','$password')";
 
 if ($conn->query($sqlinsert) === TRUE) {
-    $response = array('status' => 'success', 'data' => $sqlinsert);
+    $response = array('status' => 'success', 'message' => 'User has been registered');
     sendJsonResponse($response);
 } else {
-    $response = array('status' => 'failed', 'data' => null);
+    $response = array('status' => 'failed', 'data' => 'User failed registered');
     sendJsonResponse($response);
 }
 

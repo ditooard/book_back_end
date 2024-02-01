@@ -23,7 +23,7 @@ $data = [
     'name' => $name,
     'amount' => ($amount) * 100, // RM20
     'description' => 'Payment for order by ' . $name,
-    'callback_url' => "https://bookshelf.wedmanagement.com/api/return_payment",
+    'callback_url' => "https://bookshelf.wedmanagement.com/api/load_books.php",
     'redirect_url' => "https://bookshelf.wedmanagement.com/api/payment_update.php?userid=$userid&email=$email&phone=$phone&amount=$amount&name=$name"
 ];
 
