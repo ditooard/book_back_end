@@ -27,10 +27,6 @@ if ($result) {
             if ($conn->affected_rows > 0) {
                 $response = array('status' => 'success', 'message' => 'User email updated successfully');
                 sendJsonResponse($response);
-            } else {
-                // Jika tidak ada baris yang terpengaruh, maka `user_id` tidak ditemukan
-                $response = array('status' => 'failed', 'message' => 'User not found');
-                sendJsonResponse($response);
             }
         } else {
             $response = array(
@@ -39,6 +35,10 @@ if ($result) {
             sendJsonResponse($response);
         }
     }
+} else {
+    // Jika tidak ada baris yang terpengaruh, maka `user_id` tidak ditemukan
+    $response = array('status' => 'failed', 'message' => 'User not found');
+    sendJsonResponse($response);
 }
 
 function sendJsonResponse($sentArray)
