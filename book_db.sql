@@ -66,6 +66,7 @@ CREATE TABLE `tbl_users` (
   `user_id` int NOT NULL,
   `user_email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `user_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_phone` varchar(12) NOT NULL,
   `user_password` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
   `user_datereg` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -74,43 +75,68 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `user_email`, `user_name`, `user_password`, `user_datereg`) VALUES
-(3, 'slumberjer@gmail.com', 'Hanis', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07', '2023-11-15 12:06:53.765976'),
-(7, 'halim@email.com', 'Halim', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07', '2023-11-15 12:17:15.964762');
+INSERT INTO `tbl_users` (`user_id`, `user_email`, `user_name`, `user_phone`, `user_password`) VALUES
+(3, 'slumberjer@gmail.com', 'Hanis', '0195555567', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07'),
+(7, 'halim@email.com', 'Halim', '0122225556', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07'),
+(8, 'zahir@email.com', 'Zahir', '', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07'),
+(9, 'zarina@email.com', 'Zarina Ahmad', '', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07'),
+(10, 'jacknick@email.com', 'Jack Nick', '0194443332', 'bec75d2e4e2acf4f4ab038144c0d862505e52d07');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tbl_books`
+-- Table structure for table `tbl_carts`
 --
-ALTER TABLE `tbl_books`
-  ADD PRIMARY KEY (`book_id`),
-  ADD UNIQUE KEY `book_isbn` (`book_isbn`);
+
+CREATE TABLE `tbl_carts` (
+  `cart_id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(5) NOT NULL,
+  `book_id` varchar(5) NOT NULL,
+  `cart_qty` int(11) NOT NULL,
+  `cart_status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for table `tbl_users`
+-- Dumping data untuk tabel `tbl_carts`
 --
-ALTER TABLE `tbl_users`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_email` (`user_email`);
+
+INSERT INTO `tbl_carts` (`cart_id`, `user_id`, `book_id`, `cart_qty`, `cart_status`) VALUES
+(5, '2', '1', 1, 'New');
+
+CREATE TABLE `tbl_orders` (
+  `order_id` int(5) NOT NULL,
+  `user_id` varchar(5) NOT NULL,
+  `order_total` decimal(10,2) NOT NULL,
+  `order_date` datetime(6) NOT NULL DEFAULT current_timestamp(6),
+  `order_status` varchar(10) NOT NULL,
+  `cart_id` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `tbl_orders` (`order_id`, `user_id`, `order_total`, `order_date`, `order_status`, `cart_id`) VALUES
+(1, '7', 750.00, '2023-12-17 12:36:03.000000', 'Delivered', 13),
+(2, '8', 250.00, '2023-12-17 13:11:14.000000', 'New', 20);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT for table `tbl_orders`
 --
+ALTER TABLE `tbl_orders`
+  MODIFY `order_id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 
 --
 -- AUTO_INCREMENT for table `tbl_books`
 --
 ALTER TABLE `tbl_books`
-  MODIFY `book_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `book_id` int NOT NULL PRIMARY KEY AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -10,6 +10,7 @@ include_once("dbconnect.php");
 $userid = $_POST['userid'];
 $book_id = $_POST['book_id'];
 $cart_qty = $_POST['cart_qty'];
+$cart_status = 'New';
 
 // Check if the book is already in the cart for the user
 $checkCart = "SELECT * FROM `tbl_carts` WHERE `user_id` = '$userid' AND `book_id` = '$book_id'";
@@ -31,7 +32,7 @@ if ($result->num_rows > 0) {
     }
 } else {
     // Book is not in the cart, insert a new entry
-    $insertCart = "INSERT INTO `tbl_carts`(`user_id`, `book_id`, `cart_qty`) VALUES ('$userid','$book_id','$cart_qty')";
+    $insertCart = "INSERT INTO `tbl_carts`(`user_id`, `book_id`, `cart_qty`, `cart_status`) VALUES ('$userid','$book_id','$cart_qty', '$cart_status')";
     if ($conn->query($insertCart)) {
         $response = ['status' => 'success', 'data' => $insertCart];
         sendJsonResponse($response);
@@ -46,4 +47,3 @@ function sendJsonResponse($sentArray)
     header('Content-Type: application/json');
     echo json_encode($sentArray);
 }
-?>

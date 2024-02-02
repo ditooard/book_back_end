@@ -9,6 +9,7 @@ $phone = $_GET['phone'];
 $name = $_GET['name'];
 $userid = $_GET['userid'];
 $amount = $_GET['amount'];
+$cart_id = $_GET['cart_id'];
 //$sellerid = $_GET['sellerid'];
 
 
@@ -17,6 +18,7 @@ $collection_id = '1lg_kjfw';
 $host = 'https://www.billplz-sandbox.com/api/v3/bills';
 
 $data = [
+    'cart_id' => $cart_id,
     'collection_id' => $collection_id,
     'email' => $email,
     'mobile' => $phone,
