@@ -99,27 +99,11 @@ if ($signed === $data['x_signature']) {
 
         $updatecart = $conn->query($sqlupdatecart);
 
-        //print receipt for success transaction
-        $dataPayment = [
-            'id' => $receiptid,
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'amount' => $amount,
-            'paid' => $paidstatus
-        ];
-        $response = ['status' => 'success', 'data' => $dataPayment];
-        sendJsonResponse($response);
+        $redirectUrl = "https://www.billplz-sandbox.com/bills/$receiptid";
+        header("Location: $redirectUrl");
+        exit();
     } else {
         //print receipt for failed transaction
-        $dataPayment = [
-            'id' => $receiptid,
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'amount' => $amount,
-            'paid' => $paidstatus
-        ];
-        $response = ['status' => 'error', 'data' => 'failed transaction'];
+        $response = ['status' => 'error', 'data' => 'failed transaction your authentication server error'];
     }
 }
