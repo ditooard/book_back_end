@@ -41,7 +41,8 @@ if ($result->num_rows > 0) {
         file_put_contents($path, $decoded_string);
         // valid image extensions
 
-        $query = mysqli_query($conn, "UPDATE tbl_users SET user_photo ='$path' WHERE user_id='$userid'");
+        $files = $hashFileName . '.png';
+        $query = mysqli_query($conn, "UPDATE tbl_users SET user_photo ='$files' WHERE user_id='$userid'");
 
         echo json_encode(array("message" => "Image Uploaded Successfully", "status" => "success"));
     }
